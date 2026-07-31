@@ -1,0 +1,133 @@
+-- LINEORDER
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `default`.`lineorder` (
+    lo_orderkey BIGINT,
+    lo_linenumber SMALLINT,
+    lo_custkey BIGINT,
+    lo_partkey BIGINT,
+    lo_suppkey BIGINT,
+    lo_orderdate STRING,
+    lo_orderpriority STRING,
+    lo_shippriority SMALLINT,
+    lo_quantity SMALLINT,
+    lo_extendedprice BIGINT,
+    lo_ordtotalprice BIGINT,
+    lo_discount SMALLINT,
+    lo_revenue BIGINT,
+    lo_supplycost BIGINT,
+    lo_tax SMALLINT,
+    lo_commitdate STRING,
+    lo_shipmode STRING
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  'separatorChar' = ',',
+  'quoteChar' = '"',
+  'escapeChar' = '\\'
+)
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://ssbdata-sf1/lineorder/'
+TBLPROPERTIES ('classification' = 'csv');
+
+
+-- DATE
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `default`.`date` (
+    d_datekey STRING,
+    d_date STRING,
+    d_dayofweek STRING,
+    d_month STRING,
+    d_year INTEGER,
+    d_yearmonthnum BIGINT,
+    d_yearmonth STRING,
+    d_daynuminweek SMALLINT,
+    d_daynuminmonth SMALLINT,
+    d_daynuminyear INTEGER,
+    d_monthnuminyear SMALLINT,
+    d_weeknuminyear SMALLINT,
+    d_sellingseason STRING,
+    d_lastdayinweekfl SMALLINT,
+    d_lastdayinmonthfl SMALLINT,
+    d_holidayfl SMALLINT,
+    d_weekdayfl SMALLINT
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  'separatorChar' = ',',
+  'quoteChar' = '"',
+  'escapeChar' = '\\',
+  'timestamp.formats' = 'YYYYMMDD'
+)
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://ssbdata-sf1/date/'
+TBLPROPERTIES ('classification' = 'csv');
+
+
+-- PART
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `default`.`part` (
+    p_partkey BIGINT,
+    p_name STRING,
+    p_mfgr STRING,
+    p_category STRING,
+    p_brand STRING,
+    p_color STRING,
+    p_type STRING,
+    p_size SMALLINT,
+    p_container STRING
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  'separatorChar' = ',',
+  'quoteChar' = '"',
+  'escapeChar' = '\\'
+)
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://ssbdata-sf1/part/'
+TBLPROPERTIES ('classification' = 'csv');
+
+
+-- SUPPLIER
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `default`.`supplier` (
+    s_suppkey BIGINT,
+    s_name STRING,
+    s_address STRING,
+    s_city STRING,
+    s_nation STRING,
+    s_region STRING,
+    s_phone STRING
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  'separatorChar' = ',',
+  'quoteChar' = '"',
+  'escapeChar' = '\\'
+)
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://ssbdata-sf1/supplier/'
+TBLPROPERTIES ('classification' = 'csv');
+
+
+-- CUSTOMER
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `default`.`customer` (
+    c_custkey BIGINT,
+    c_name STRING,
+    c_address STRING,
+    c_city STRING,
+    c_nation STRING,
+    c_region STRING,
+    c_phone STRING,
+    c_mktsegment STRING
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  'separatorChar' = ',',
+  'quoteChar' = '"',
+  'escapeChar' = '\\'
+)
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://ssbdata-sf1/customer/'
+TBLPROPERTIES ('classification' = 'csv');
+

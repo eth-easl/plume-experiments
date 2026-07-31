@@ -1,0 +1,1065 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.134159917s  INFO prepare_target{force=false package_id=trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader) target="trino-loader"}: cargo::core::compiler::fingerprint: fingerprint error for trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader)/Check { test: false }/TargetInner { name: "trino-loader", doc: true, ..: with_path("/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/src/main.rs", Edition2024) }
+   0.134178292s  INFO prepare_target{force=false package_id=trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader) target="trino-loader"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/trino-loader-e4bd6a274c4168ba/bin-trino-loader`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.141491959s  INFO prepare_target{force=false package_id=reqwest v0.13.2 target="reqwest"}: cargo::core::compiler::fingerprint: fingerprint error for reqwest v0.13.2/Check { test: false }/TargetInner { ..: lib_target("reqwest", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/reqwest-0.13.2/src/lib.rs", Edition2021) }
+   0.141514042s  INFO prepare_target{force=false package_id=reqwest v0.13.2 target="reqwest"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/reqwest-49c076c19f29a93f/lib-reqwest`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.150642375s  INFO prepare_target{force=false package_id=hyper-rustls v0.27.7 target="hyper_rustls"}: cargo::core::compiler::fingerprint: fingerprint error for hyper-rustls v0.27.7/Check { test: false }/TargetInner { ..: lib_target("hyper_rustls", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-rustls-0.27.7/src/lib.rs", Edition2021) }
+   0.150648875s  INFO prepare_target{force=false package_id=hyper-rustls v0.27.7 target="hyper_rustls"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/hyper-rustls-f06d58a6fb20eb4c/lib-hyper_rustls`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.153464834s  INFO prepare_target{force=false package_id=rustls v0.23.37 target="rustls"}: cargo::core::compiler::fingerprint: fingerprint error for rustls v0.23.37/Check { test: false }/TargetInner { ..: lib_target("rustls", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-0.23.37/src/lib.rs", Edition2021) }
+   0.153471875s  INFO prepare_target{force=false package_id=rustls v0.23.37 target="rustls"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/rustls-73932d1a9657310e/lib-rustls`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.153720000s  INFO prepare_target{force=false package_id=aws-lc-rs v1.16.0 target="aws_lc_rs"}: cargo::core::compiler::fingerprint: fingerprint error for aws-lc-rs v1.16.0/Check { test: false }/TargetInner { ..: lib_target("aws_lc_rs", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-rs-1.16.0/src/lib.rs", Edition2021) }
+   0.153724500s  INFO prepare_target{force=false package_id=aws-lc-rs v1.16.0 target="aws_lc_rs"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/aws-lc-rs-5f132f2fecf97475/lib-aws_lc_rs`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.153936792s  INFO prepare_target{force=false package_id=aws-lc-rs v1.16.0 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for aws-lc-rs v1.16.0/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-rs-1.16.0/build.rs", Edition2021) }
+   0.153940917s  INFO prepare_target{force=false package_id=aws-lc-rs v1.16.0 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/aws-lc-rs-3bd09794363b80a2/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::custom_build::build_work
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: cargo::core::compiler::compile
+  12: cargo::core::compiler::compile
+  13: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  14: cargo::ops::cargo_compile::compile_ws
+  15: cargo::ops::cargo_compile::compile_with_exec
+  16: cargo::ops::cargo_compile::compile
+  17: cargo::commands::check::exec
+  18: <cargo::cli::Exec>::exec
+  19: cargo::main
+  20: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  21: std::rt::lang_start::<()>::{closure#0}
+  22: std::rt::lang_start_internal
+  23: _main
+   0.154209500s  INFO prepare_target{force=false package_id=aws-lc-sys v0.37.1 target="build-script-main"}: cargo::core::compiler::fingerprint: fingerprint error for aws-lc-sys v0.37.1/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-main", "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/builder/main.rs", Edition2021) }
+   0.154213000s  INFO prepare_target{force=false package_id=aws-lc-sys v0.37.1 target="build-script-main"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/aws-lc-sys-5805f30907f7483f/run-build-script-build-script-main`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::custom_build::build_work
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: cargo::core::compiler::compile
+  12: cargo::core::compiler::compile
+  13: cargo::core::compiler::compile
+  14: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  15: cargo::ops::cargo_compile::compile_ws
+  16: cargo::ops::cargo_compile::compile_with_exec
+  17: cargo::ops::cargo_compile::compile
+  18: cargo::commands::check::exec
+  19: <cargo::cli::Exec>::exec
+  20: cargo::main
+  21: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  22: std::rt::lang_start::<()>::{closure#0}
+  23: std::rt::lang_start_internal
+  24: _main
+   0.155367709s  INFO prepare_target{force=false package_id=aws-lc-sys v0.37.1 target="aws_lc_sys"}: cargo::core::compiler::fingerprint: fingerprint error for aws-lc-sys v0.37.1/Check { test: false }/TargetInner { ..: lib_target("aws_lc_sys", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/src/lib.rs", Edition2021) }
+   0.155371667s  INFO prepare_target{force=false package_id=aws-lc-sys v0.37.1 target="aws_lc_sys"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/aws-lc-sys-1009ddaf57d02cbe/lib-aws_lc_sys`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: cargo::core::compiler::compile
+  12: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  13: cargo::ops::cargo_compile::compile_ws
+  14: cargo::ops::cargo_compile::compile_with_exec
+  15: cargo::ops::cargo_compile::compile
+  16: cargo::commands::check::exec
+  17: <cargo::cli::Exec>::exec
+  18: cargo::main
+  19: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  20: std::rt::lang_start::<()>::{closure#0}
+  21: std::rt::lang_start_internal
+  22: _main
+   0.155583334s  INFO prepare_target{force=false package_id=rustls v0.23.37 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for rustls v0.23.37/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-0.23.37/build.rs", Edition2021) }
+   0.155591125s  INFO prepare_target{force=false package_id=rustls v0.23.37 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/rustls-3d68111c04076d54/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::custom_build::build_work
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: cargo::core::compiler::compile
+  12: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  13: cargo::ops::cargo_compile::compile_ws
+  14: cargo::ops::cargo_compile::compile_with_exec
+  15: cargo::ops::cargo_compile::compile
+  16: cargo::commands::check::exec
+  17: <cargo::cli::Exec>::exec
+  18: cargo::main
+  19: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  20: std::rt::lang_start::<()>::{closure#0}
+  21: std::rt::lang_start_internal
+  22: _main
+   0.155951292s  INFO prepare_target{force=false package_id=rustls-webpki v0.103.9 target="webpki"}: cargo::core::compiler::fingerprint: fingerprint error for rustls-webpki v0.103.9/Check { test: false }/TargetInner { ..: lib_target("webpki", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-webpki-0.103.9/src/lib.rs", Edition2021) }
+   0.155955459s  INFO prepare_target{force=false package_id=rustls-webpki v0.103.9 target="webpki"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/rustls-webpki-87c0363f7a124a57/lib-webpki`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.156305709s  INFO prepare_target{force=false package_id=tokio-rustls v0.26.4 target="tokio_rustls"}: cargo::core::compiler::fingerprint: fingerprint error for tokio-rustls v0.26.4/Check { test: false }/TargetInner { ..: lib_target("tokio_rustls", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-rustls-0.26.4/src/lib.rs", Edition2021) }
+   0.156310542s  INFO prepare_target{force=false package_id=tokio-rustls v0.26.4 target="tokio_rustls"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/tokio-rustls-1ac65b8b2377c97f/lib-tokio_rustls`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.156606125s  INFO prepare_target{force=false package_id=rustls-platform-verifier v0.6.2 target="rustls_platform_verifier"}: cargo::core::compiler::fingerprint: fingerprint error for rustls-platform-verifier v0.6.2/Check { test: false }/TargetInner { ..: lib_target("rustls_platform_verifier", ["lib"], "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-platform-verifier-0.6.2/src/lib.rs", Edition2021) }
+   0.156610584s  INFO prepare_target{force=false package_id=rustls-platform-verifier v0.6.2 target="rustls_platform_verifier"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/rustls-platform-verifier-a50b80135064ff67/lib-rustls_platform_verifier`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.164209167s  INFO prepare_target{force=false package_id=trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader) target="trino-loader"}: cargo::core::compiler::fingerprint: fingerprint error for trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader)/Check { test: true }/TargetInner { name: "trino-loader", doc: true, ..: with_path("/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/src/main.rs", Edition2024) }
+   0.164217250s  INFO prepare_target{force=false package_id=trino-loader v0.1.0 (/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader) target="trino-loader"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/.fingerprint/trino-loader-c4d65e5a5c63ea11/test-bin-trino-loader`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   Compiling aws-lc-sys v0.37.1
+warning: aws-lc-sys@0.37.1: Environment Variable found 'CARGO_ENCODED_RUSTFLAGS': ''
+warning: aws-lc-sys@0.37.1: Emitting configuration: cargo:rustc-cfg=universal_prefixed
+warning: aws-lc-sys@0.37.1: Building with: CC
+warning: aws-lc-sys@0.37.1: Symbol Prefix: Some("aws_lc_0_37_1")
+warning: aws-lc-sys@0.37.1: Target platform: 'aarch64-apple-darwin'
+warning: aws-lc-sys@0.37.1: Compilation of 'c11.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-c11/7dfda64fdf5a526c-c11.o"]).
+warning: aws-lc-sys@0.37.1: Compilation of 'stdalign_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-stdalign_check/7dfda64fdf5a526c-stdalign_check.o"]).
+warning: aws-lc-sys@0.37.1: Compilation of 'builtin_swap_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-builtin_swap_check/7dfda64fdf5a526c-builtin_swap_check.o"]).
+warning: aws-lc-sys@0.37.1: Compilation of 'neon_sha3_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-neon_sha3_check/7dfda64fdf5a526c-neon_sha3_check.o"]).
+warning: aws-lc-sys@0.37.1: /Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:209:11: warning: 'syscall' is deprecated: first deprecated in macOS 10.12 - syscall(2) is unsupported; please switch to a supported interface. For SYS_kdebug_trace use kdebug_signpost(). [-Wdeprecated-declarations]
+warning: aws-lc-sys@0.37.1:     ret = syscall(__NR_getrandom, buf, buf_len, block ? 0 : GRND_NONBLOCK);
+warning: aws-lc-sys@0.37.1:           ^
+warning: aws-lc-sys@0.37.1: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h:754:6: note: 'syscall' has been explicitly marked deprecated here
+warning: aws-lc-sys@0.37.1: int      syscall(int, ...);
+warning: aws-lc-sys@0.37.1:          ^
+warning: aws-lc-sys@0.37.1: /Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:370:9: error: implicit declaration of function 'ioctl' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+warning: aws-lc-sys@0.37.1:     if (ioctl(urandom_fd, RNDGETENTCNT, &entropy_bits)) {
+warning: aws-lc-sys@0.37.1:         ^
+warning: aws-lc-sys@0.37.1: /Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:370:27: error: use of undeclared identifier 'RNDGETENTCNT'
+warning: aws-lc-sys@0.37.1:     if (ioctl(urandom_fd, RNDGETENTCNT, &entropy_bits)) {
+warning: aws-lc-sys@0.37.1:                           ^
+warning: aws-lc-sys@0.37.1: 1 warning and 2 errors generated.
+warning: aws-lc-sys@0.37.1: ToolExecError: command did not execute successfully (status code exit status: 1): env -u IPHONEOS_DEPLOYMENT_TARGET LC_ALL="C" "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-gdwarf-2" "-fno-omit-frame-pointer" "--target=arm64-apple-macosx" "-mmacosx-version-min=12.3" "-std=c11" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/generated-include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/s2n-bignum-imported/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/jitterentropy/jitterentropy-library" "-Wall" "-Wextra" "-Wno-unused-parameter" "-pthread" "-Wno-overriding-t-option" "-DBORINGSSL_IMPLEMENTATION=1" "-DBORINGSSL_PREFIX=aws_lc_0_37_1" "-D_DARWIN_C_SOURCE=1" "-DAWS_LC_STDALIGN_AVAILABLE=1" "-DAWS_LC_BUILTIN_SWAP_SUPPORTED=1" "-DMY_ASSEMBLER_SUPPORTS_NEON_SHA3_EXTENSION=1" "-o" "/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/7bf3e571b6558a6b-urandom.o" "-c" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c"
+error: failed to run custom build command for `aws-lc-sys v0.37.1`
+note: To improve backtraces for build dependencies, set the CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG=true environment variable to enable debug information generation.
+
+Caused by:
+  process didn't exit successfully: `/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-cc1fd39d264a38a3/build-script-main` (exit status: 1)
+  --- stdout
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_PREFIX_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_PREFIX
+  cargo:rerun-if-env-changed=AWS_LC_SYS_PREGENERATING_BINDINGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_PREGENERATING_BINDINGS
+  cargo:rerun-if-env-changed=AWS_LC_SYS_EXTERNAL_BINDGEN_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_EXTERNAL_BINDGEN
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_ASM_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_ASM
+  cargo:rerun-if-env-changed=AWS_LC_SYS_PREBUILT_NASM_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_PREBUILT_NASM
+  cargo:rerun-if-env-changed=AWS_LC_SYS_C_STD_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_C_STD
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CMAKE_BUILDER_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CMAKE_BUILDER
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_PREGENERATED_SRC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_PREGENERATED_SRC
+  cargo:rerun-if-env-changed=AWS_LC_SYS_EFFECTIVE_TARGET_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_EFFECTIVE_TARGET
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_JITTER_ENTROPY_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_JITTER_ENTROPY
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_U1_BINDINGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_NO_U1_BINDINGS
+  cargo:rerun-if-env-changed=CARGO_ENCODED_RUSTFLAGS
+  cargo:warning=Environment Variable found 'CARGO_ENCODED_RUSTFLAGS': ''
+  cargo:warning=Emitting configuration: cargo:rustc-cfg=universal_prefixed
+  cargo:rustc-cfg=universal_prefixed
+  cargo:rerun-if-env-changed=AWS_LC_SYS_STATIC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_STATIC
+  cargo:rerun-if-env-changed=CARGO_FEATURE_SSL
+  cargo:warning=Building with: CC
+  cargo:warning=Symbol Prefix: Some("aws_lc_0_37_1")
+  cargo:rerun-if-env-changed=CARGO_FEATURE_SSL
+  cargo:warning=Target platform: 'aarch64-apple-darwin'
+  cargo:root=/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CFLAGS
+  cargo:rerun-if-env-changed=TARGET_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=TARGET_CFLAGS
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CFLAGS
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=CFLAGS
+  OPT_LEVEL = Some(0)
+  OUT_DIR = Some(/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  OPT_LEVEL = Some(0)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  cargo:warning=Compilation of 'c11.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-c11/7dfda64fdf5a526c-c11.o"]).
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CC
+  cargo:rerun-if-env-changed=TARGET_CC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=TARGET_CC
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CC
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=CC
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CXX_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CXX
+  cargo:rerun-if-env-changed=TARGET_CXX_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=TARGET_CXX
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CXX_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CXX
+  cargo:rerun-if-env-changed=CXX_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=CXX
+  OUT_DIR = Some(/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out)
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  TARGET = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  OUT_DIR = Some(/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out)
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  TARGET = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  OPT_LEVEL = Some(0)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  cargo:warning=Compilation of 'stdalign_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-stdalign_check/7dfda64fdf5a526c-stdalign_check.o"]).
+  OPT_LEVEL = Some(0)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  cargo:warning=Compilation of 'builtin_swap_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-builtin_swap_check/7dfda64fdf5a526c-builtin_swap_check.o"]).
+  OPT_LEVEL = Some(0)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  cargo:warning=Compilation of 'neon_sha3_check.c' succeeded - Ok(["/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/out-neon_sha3_check/7dfda64fdf5a526c-neon_sha3_check.o"]).
+  OPT_LEVEL = Some(0)
+  OUT_DIR = Some(/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_TARGET_CFLAGS
+  cargo:rerun-if-env-changed=TARGET_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=TARGET_CFLAGS
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=AWS_LC_SYS_CFLAGS
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  cargo:rerun-if-env-changed=CFLAGS
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  OUT_DIR = Some(/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out)
+  OPT_LEVEL = Some(0)
+  TARGET = Some(aarch64-apple-darwin)
+  CARGO_ENCODED_RUSTFLAGS = Some()
+  HOST = Some(aarch64-apple-darwin)
+  cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+  CC_aarch64-apple-darwin = None
+  cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+  CC_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  cargo:rerun-if-env-changed=MACOSX_DEPLOYMENT_TARGET
+  MACOSX_DEPLOYMENT_TARGET = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+  CFLAGS_aarch64_apple_darwin = None
+  cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+  CFLAGS_aarch64-apple-darwin = None
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  cargo:warning=/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:209:11: warning: 'syscall' is deprecated: first deprecated in macOS 10.12 - syscall(2) is unsupported; please switch to a supported interface. For SYS_kdebug_trace use kdebug_signpost(). [-Wdeprecated-declarations]
+  cargo:warning=    ret = syscall(__NR_getrandom, buf, buf_len, block ? 0 : GRND_NONBLOCK);
+  cargo:warning=          ^
+  cargo:warning=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h:754:6: note: 'syscall' has been explicitly marked deprecated here
+  cargo:warning=int      syscall(int, ...);
+  cargo:warning=         ^
+  cargo:warning=/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:370:9: error: implicit declaration of function 'ioctl' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+  cargo:warning=    if (ioctl(urandom_fd, RNDGETENTCNT, &entropy_bits)) {
+  cargo:warning=        ^
+  cargo:warning=/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c:370:27: error: use of undeclared identifier 'RNDGETENTCNT'
+  cargo:warning=    if (ioctl(urandom_fd, RNDGETENTCNT, &entropy_bits)) {
+  cargo:warning=                          ^
+  cargo:warning=1 warning and 2 errors generated.
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 1
+  cargo:warning=ToolExecError: command did not execute successfully (status code exit status: 1): env -u IPHONEOS_DEPLOYMENT_TARGET LC_ALL="C" "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-gdwarf-2" "-fno-omit-frame-pointer" "--target=arm64-apple-macosx" "-mmacosx-version-min=12.3" "-std=c11" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/generated-include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/s2n-bignum-imported/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/jitterentropy/jitterentropy-library" "-Wall" "-Wextra" "-Wno-unused-parameter" "-pthread" "-Wno-overriding-t-option" "-DBORINGSSL_IMPLEMENTATION=1" "-DBORINGSSL_PREFIX=aws_lc_0_37_1" "-D_DARWIN_C_SOURCE=1" "-DAWS_LC_STDALIGN_AVAILABLE=1" "-DAWS_LC_BUILTIN_SWAP_SUPPORTED=1" "-DMY_ASSEMBLER_SUPPORTS_NEON_SHA3_EXTENSION=1" "-o" "/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/7bf3e571b6558a6b-urandom.o" "-c" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c"
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+  exit status: 0
+
+  --- stderr
+
+
+  error occurred in cc-rs: command did not execute successfully (status code exit status: 1): env -u IPHONEOS_DEPLOYMENT_TARGET LC_ALL="C" "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-gdwarf-2" "-fno-omit-frame-pointer" "--target=arm64-apple-macosx" "-mmacosx-version-min=12.3" "-std=c11" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/generated-include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/s2n-bignum/s2n-bignum-imported/include" "-I" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/third_party/jitterentropy/jitterentropy-library" "-Wall" "-Wextra" "-Wno-unused-parameter" "-pthread" "-Wno-overriding-t-option" "-DBORINGSSL_IMPLEMENTATION=1" "-DBORINGSSL_PREFIX=aws_lc_0_37_1" "-D_DARWIN_C_SOURCE=1" "-DAWS_LC_STDALIGN_AVAILABLE=1" "-DAWS_LC_BUILTIN_SWAP_SUPPORTED=1" "-DMY_ASSEMBLER_SUPPORTS_NEON_SHA3_EXTENSION=1" "-o" "/Users/tobystocki/Projects/dataprocessing-experiments/throughput-loader/target/debug/build/aws-lc-sys-5805f30907f7483f/out/7bf3e571b6558a6b-urandom.o" "-c" "/Users/tobystocki/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-sys-0.37.1/aws-lc/crypto/rand_extra/urandom.c"
+
+

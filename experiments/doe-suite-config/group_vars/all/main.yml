@@ -1,0 +1,72 @@
+
+# set remote repository (code will be cloned on each remote host)
+git_remote_repository: "git@github.com:eth-easl/dataprocessing_experiments.git"
+# Can also get multiple repos and with a specific branch / commit
+#git_remote_repository:
+#- repo: git@github.com:nicolas-kuechler/doe-suite.git
+#  version: main
+#- repo: git@github.com:nicolas-kuechler/doe-suite.git
+#  version: etl
+
+prj_id_prefix: "dataprocessing"
+
+
+prj_id: "{{ prj_id_prefix }}_{{ does_project_id_suffix }}"
+
+
+# The following parameters define how the playbook checks whether a job finished, fetches the results and starts the next job.
+# - 'job_n_tries' is the maximal number times we check the job's status before aborting
+# - 'job_check_wait_time' is the time (in seconds) to wait in between checking whether a job finished
+# Note that those parameters directly influence the playbook duration:
+# Each experiments runs for at most #jobs * 'job_n_tries' * 'job_check_wait_time' seconds (usually less when the experiment finishes earlier).
+# The experiments are mostly run concurrently (apart from the setup and cleanup parts). Thus, the experiment with the most jobs defines the
+# maximal duration. But as experiments usually use fewer than 'job_n_tries' tries, an experiment with few long-running jobs can be the bottleneck too.
+job_n_tries: 100   # should be max 1000 (otherwise playbook freezes -> unsure why)
+job_check_wait_time: 5
+
+# if the previous job finished less than 30 seconds before
+etl_minimum_delay_sec: 30
+
+experiment_folder: "{{ '/tmp/' + prj_id }}"
+
+trino_tracing_enabled: true
+trino_otel_exporter_protocol: grpc
+trino_otel_exporter_endpoint: "http://{{ hostvars['master_01']['private_dns_name'] }}:{{ jaeger_otlp_grpc_port }}"
+
+jaeger_version: "2.17.0"
+jaeger_arch: amd64
+jaeger_listen_host: "0.0.0.0"
+jaeger_otlp_grpc_port: 4317
+jaeger_otlp_http_port: 4318
+jaeger_ui_port: 16686
+
+# can set variables `remote_dir` and `remote_results_dir` in e.g., manual inventory, to set host specific variables
+remote:
+  dir: "{{ experiment_folder + '/doe-suite' }}"
+  results_dir: "{{ experiment_folder + '/doe-suite-results' }}"
+
+local:
+  results_dir: "{{ does_project_dir }}/doe-suite-results"
+  designs_dir: "{{ does_config_dir }}/designs"
+
+# setup specific variables that are needed in multiple places
+
+# exp_base:
+
+#   aws_region: "eu-central-1"
+
+#   name: frankfurt
+#   vpc_name: "{{ prj_id }}_vpc_base"
+#   vpc_cidr_block: 10.100.0.0/16
+#   vpc_subnet_name: "{{ prj_id }}_subnet_az1"
+#   vpc_subnet_cidr: 10.100.0.0/24
+#   sg_name: "{{ prj_id }}_{{ suite | default('') }}_sg"
+#   sg_desc: "{{ prj_id }} {{ suite | default('') }} security group"
+# list the eni to create in the vpc
+#  eni:
+#  - name: "{{ prj_id }}_eni0"
+#    desc: "{{ prj_id }} elastic network interface 0"
+
+# set the flag to attach an eni on a host type
+# attach_eni: True
+

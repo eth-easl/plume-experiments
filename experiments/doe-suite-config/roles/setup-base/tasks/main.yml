@@ -1,0 +1,27 @@
+---
+
+
+- debug:
+    msg: "-> base tasks running on all nodes"
+  tags: [print_action]
+
+- name: Make sure the bashrc is executed
+  ansible.builtin.replace:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: 'case \$- in(?s:.)*?esac'
+
+- name: Install Node Exporter
+  become: True
+  ansible.builtin.apt:
+    pkg:
+      - prometheus-node-exporter
+    update_cache: true
+
+- name: Enable and start Node Exporter
+  become: True
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    enabled: true
+    state: started
+
+  

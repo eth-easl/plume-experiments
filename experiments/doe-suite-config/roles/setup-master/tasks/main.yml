@@ -1,0 +1,179 @@
+---
+
+
+- debug:
+    msg: "-> master only"
+  tags: [print_action]
+
+- name: make sure cargo is installed
+  include_tasks: ../rust.yml
+
+- name: Update repositories cache and install required packages
+  become: True
+  apt:
+    pkg:
+      - apt-transport-https
+      - prometheus
+    update_cache: true
+
+- name: Create Grafana APT keyring directory
+  become: True
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install Grafana repository key
+  become: True
+  ansible.builtin.get_url:
+    url: https://apt.grafana.com/gpg-full.key
+    dest: /etc/apt/keyrings/grafana.asc
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Add Grafana APT repository
+  become: True
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com stable main"
+    filename: grafana
+    state: present
+
+- name: Install Grafana
+  become: True
+  ansible.builtin.apt:
+    pkg:
+      - grafana
+    update_cache: true
+
+- name: Configure Prometheus scrape targets
+  become: True
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Enable and start Prometheus
+  become: True
+  ansible.builtin.service:
+    name: prometheus
+    enabled: true
+    state: restarted
+
+- name: Create Jaeger install directory
+  become: True
+  ansible.builtin.file:
+    path: "/opt/jaeger-{{ jaeger_version }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Download Jaeger
+  become: True
+  ansible.builtin.get_url:
+    url: "https://github.com/jaegertracing/jaeger/releases/download/v{{ jaeger_version }}/jaeger-{{ jaeger_version }}-linux-{{ jaeger_arch }}.tar.gz"
+    dest: "/tmp/jaeger-{{ jaeger_version }}-linux-{{ jaeger_arch }}.tar.gz"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install Jaeger
+  become: True
+  ansible.builtin.unarchive:
+    src: "/tmp/jaeger-{{ jaeger_version }}-linux-{{ jaeger_arch }}.tar.gz"
+    dest: "/opt/jaeger-{{ jaeger_version }}"
+    remote_src: true
+    extra_opts: "--strip-components=1"
+    creates: "/opt/jaeger-{{ jaeger_version }}/jaeger"
+
+- name: Link active Jaeger version
+  become: True
+  ansible.builtin.file:
+    src: "/opt/jaeger-{{ jaeger_version }}"
+    dest: /opt/jaeger
+    state: link
+    force: true
+    owner: root
+    group: root
+
+- name: Configure Jaeger service
+  become: True
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/jaeger.service
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Jaeger all-in-one tracing backend
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=simple
+      ExecStart=/opt/jaeger/jaeger --set=receivers.otlp.protocols.grpc.endpoint={{ jaeger_listen_host }}:{{ jaeger_otlp_grpc_port }} --set=receivers.otlp.protocols.http.endpoint={{ jaeger_listen_host }}:{{ jaeger_otlp_http_port }} --set=extensions.jaeger_query.http.endpoint={{ jaeger_listen_host }}:{{ jaeger_ui_port }}
+      Restart=on-failure
+      RestartSec=5
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Enable and start Jaeger
+  become: True
+  ansible.builtin.systemd:
+    name: jaeger
+    enabled: true
+    state: restarted
+    daemon_reload: true
+
+- name: Create Grafana provisioning directories
+  become: True
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - /etc/grafana/provisioning/datasources
+    - /etc/grafana/provisioning/dashboards
+    - /var/lib/grafana/dashboards
+
+- name: Provision Grafana Prometheus data source
+  become: True
+  ansible.builtin.template:
+    src: grafana-datasource-prometheus.yml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yml
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Provision Grafana dashboard provider
+  become: True
+  ansible.builtin.template:
+    src: grafana-dashboard-provider.yml.j2
+    dest: /etc/grafana/provisioning/dashboards/monitoring.yml
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install Grafana monitoring dashboard
+  become: True
+  ansible.builtin.template:
+    src: grafana-monitoring-dashboard.json.j2
+    dest: /var/lib/grafana/dashboards/cluster-monitoring.json
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Enable and start Grafana
+  become: True
+  ansible.builtin.service:
+    name: grafana-server
+    enabled: true
+    state: restarted

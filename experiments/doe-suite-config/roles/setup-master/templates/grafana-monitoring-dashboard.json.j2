@@ -1,0 +1,422 @@
+{
+  "id": null,
+  "uid": "cluster-monitoring",
+  "title": "Cluster Monitoring",
+  "tags": [
+    "doe-suite",
+    "monitoring",
+    "trino"
+  ],
+  "timezone": "browser",
+  "editable": false,
+  "graphTooltip": 1,
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "{{ prometheus_interval }}",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "100 - (avg by (inventory_host) (rate(node_cpu_seconds_total{job=\"node\",mode=\"idle\"}[{{ prometheus_rate_interval }}])) * 100)",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "(1 - (avg by (inventory_host) (node_memory_MemAvailable_bytes{job=\"node\"}) / avg by (inventory_host) (node_memory_MemTotal_bytes{job=\"node\"}))) * 100",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (inventory_host) (rate(node_network_receive_bytes_total{job=\"node\",device!~\"lo\"}[{{ prometheus_rate_interval }}]))",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Receive",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (inventory_host) (rate(node_network_transmit_bytes_total{job=\"node\",device!~\"lo\"}[{{ prometheus_rate_interval }}]))",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Send",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 5,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "trino_execution_name_QueryManager_RunningQueries{job=\"trino\"}",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Trino Running Queries",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "100 * sum by (inventory_host) (rate({job=\"trino\",__name__=~\"JMX_io_trino_filesystem_alluxio_NAME_.*_TYPE_AlluxioCacheStats_ATTRIBUTE_CacheReads_AllTime_Total\"}[{{ prometheus_rate_interval }}])) / clamp_min(sum by (inventory_host) (rate({job=\"trino\",__name__=~\"JMX_io_trino_filesystem_alluxio_NAME_.*_TYPE_AlluxioCacheStats_ATTRIBUTE_CacheReads_AllTime_Total\"}[{{ prometheus_rate_interval }}])) + sum by (inventory_host) (rate({job=\"trino\",__name__=~\"JMX_io_trino_filesystem_alluxio_NAME_.*_TYPE_AlluxioCacheStats_ATTRIBUTE_ExternalReads_AllTime_Total\"}[{{ prometheus_rate_interval }}])), 1)",
+            "legendFormat": "{% raw %}{{ inventory_host }}{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Trino FS Cache Hit Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "id": 7,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (inventory_host) (rate({job=\"trino\",__name__=~\"JMX_io_trino_filesystem_alluxio_NAME_.*_TYPE_AlluxioCacheStats_ATTRIBUTE_CacheReads_AllTime_Total\"}[{{ prometheus_rate_interval }}]))",
+            "legendFormat": "{% raw %}{{ inventory_host }} cache{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Trino FS Cache Read Bandwidth",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "never"
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (inventory_host) (rate({job=\"trino\",__name__=~\"JMX_io_trino_filesystem_alluxio_NAME_.*_TYPE_AlluxioCacheStats_ATTRIBUTE_ExternalReads_AllTime_Total\"}[{{ prometheus_rate_interval }}]))",
+            "legendFormat": "{% raw %}{{ inventory_host }} external{% endraw %}",
+            "refId": "A"
+          }
+        ],
+        "title": "Trino FS External Read Bandwidth",
+        "type": "timeseries"
+      }
+  ]
+}

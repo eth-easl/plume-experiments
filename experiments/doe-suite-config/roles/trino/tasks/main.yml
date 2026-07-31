@@ -1,0 +1,79 @@
+- name: Update repositories cache and install required packages
+  become: True
+  apt:
+    pkg:
+      openjdk-25-jre-headless # needs exactly java 21 to work properly
+    # TODO: add other required packages (only for base)
+
+- name: Install Trino
+  block:
+    - name: download trino tar
+      ansible.builtin.get_url:
+        url: "https://github.com/trinodb/trino/releases/download/479/trino-server-479.tar.gz"
+        dest: "{{ experiment_folder + '/trino.tar.gz' }}"
+    - name: create trino folder
+      ansible.builtin.file:
+        path: "{{ experiment_folder + '/trino/' }}"
+        state: "directory"
+    - name: unpack trino tar
+      ansible.builtin.unarchive:
+        src: "{{ experiment_folder + '/trino.tar.gz' }}"
+        dest: "{{ experiment_folder + '/trino' }}"
+        remote_src: true
+        extra_opts: "--strip-components=1"
+
+    - name: create config folder
+      ansible.builtin.file:
+        path: "{{ experiment_folder + '/trino/etc' }}"
+        state: "directory"
+    - name: create trino data folder (for logs etc.)
+      ansible.builtin.file:
+        path: "/tmp/trino-data"
+        state: "directory"
+    - name: create trino cache folder in RAM
+      ansible.builtin.file:
+        path: "/dev/shm/trino-cache"
+        state: "directory"
+    - name: move and configure node config file
+      ansible.builtin.template:
+        dest: "{{ experiment_folder + '/trino/etc/node.properties' }}"
+        src: "node.properties"
+    - name: move and configure jvm config file 
+      ansible.builtin.template:
+        dest: "{{ experiment_folder + '/trino/etc/jvm.config' }}"
+        src: "jvm.config"
+    - name: move and configure server config file 
+      ansible.builtin.template:
+        dest: "{{ experiment_folder + '/trino/etc/config.properties' }}"
+        src: "config.properties"
+    - name: move and configure access control config file 
+      ansible.builtin.template:
+        dest: "{{ experiment_folder + '/trino/etc/access-control.properties' }}"
+        src: "access-control.properties"
+    # - name: add http connector plugin
+    #   ansible.builtin.get_url:
+    #     url: https://github.com/trinodb/trino/releases/download/479/trino-example-http-479.zip
+    #     dest: /tmp 
+    # - name: unzip
+    #   ansible.builtin.unarchive:
+    #     src: /tmp/trino-example-http-479.zip
+    #     dest: /tmp
+    #     remote_src: true
+    # - name: move
+    #   ansible.builtin.copy:
+    #     src: /tmp/trino-example-http-479/
+    #     dest: "{{ experiment_folder + '/trino/plugin/example-http/' }}" 
+    #     remote_src: true
+
+    - name: add catalog folder
+      ansible.builtin.file:
+        path: "{{ experiment_folder + '/trino/etc/catalog' }}"
+        state: "directory"
+    - name: add http catalog
+      ansible.builtin.template:
+        dest: "{{ experiment_folder + '/trino/etc/catalog/s3data.properties' }}"
+        src: "catalog/s3data.properties"
+
+- name: Start Trino
+  ansible.builtin.command:
+    cmd: "{{ experiment_folder + '/trino/bin/launcher' }} restart"

@@ -1,0 +1,30 @@
+global:
+  scrape_interval: {{ prometheus_interval }}
+  evaluation_interval: {{ prometheus_interval }}
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - "localhost:9090"
+
+  - job_name: node
+    static_configs:
+{% for host in groups['all'] | sort %}
+      - targets:
+          - "{{ hostvars[host].private_dns_name }}:9100"
+        labels:
+          inventory_host: "{{ host }}"
+{% endfor %}
+
+  - job_name: trino
+    metrics_path: /metrics
+    basic_auth:
+      username: prometheus
+    static_configs:
+{% for host in groups['all'] | sort %}
+      - targets:
+          - "{{ hostvars[host].private_dns_name }}:8080"
+        labels:
+          inventory_host: "{{ host }}"
+{% endfor %}

@@ -1,0 +1,108 @@
+CREATE EXTERNAL TABLE customer (
+    c_custkey     BIGINT,
+    c_name        STRING,
+    c_address     STRING,
+    c_nationkey   BIGINT,
+    c_phone       STRING,
+    c_acctbal     DECIMAL(15,2),
+    c_mktsegment  STRING,
+    c_comment     STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/customer';
+
+CREATE EXTERNAL TABLE lineitem
+(
+    l_orderkey    BIGINT,
+    l_partkey     BIGINT,
+    l_suppkey     BIGINT,
+    l_linenumber  INTEGER,
+    l_quantity    DECIMAL(15,2),
+    l_extendedprice  DECIMAL(15,2),
+    l_discount    DECIMAL(15,2),
+    l_tax         DECIMAL(15,2),
+    l_returnflag  STRING,
+    l_linestatus  STRING,
+    l_shipdate    DATE,
+    l_commitdate  DATE,
+    l_receiptdate DATE,
+    l_shipinstruct STRING,
+    l_shipmode     STRING,
+    l_comment      STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/lineitem';
+
+CREATE EXTERNAL TABLE nation
+(
+    n_nationkey  BIGINT,
+    n_name       STRING,
+    n_regionkey  BIGINT,
+    n_comment    STRING 
+
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/nation';
+
+CREATE EXTERNAL TABLE orders
+(
+    o_orderkey       BIGINT,
+    o_custkey        BIGINT,
+    o_orderstatus    STRING,
+    o_totalprice     DECIMAL(15,2),
+    o_orderdate      DATE,
+    o_orderpriority  STRING,  
+    o_clerk          STRING, 
+    o_shippriority   INTEGER,
+    o_comment        STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/orders';
+
+CREATE EXTERNAL TABLE part
+(
+    p_partkey     BIGINT,
+    p_name        STRING,
+    p_mfgr        STRING,
+    p_brand       STRING,
+    p_type        STRING,
+    p_size        INTEGER,
+    p_container   STRING,
+    p_retailprice DECIMAL(15,2),
+    p_comment     STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/part';
+
+CREATE EXTERNAL TABLE partsupp
+(
+    ps_partkey     BIGINT,
+    ps_suppkey     BIGINT,
+    ps_availqty    INTEGER,
+    ps_supplycost  DECIMAL(15,2),
+    ps_comment     STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/partsupp';
+
+CREATE EXTERNAL TABLE supplier
+(
+    s_suppkey     BIGINT,
+    s_name        STRING,
+    s_address     STRING,
+    s_nationkey   BIGINT,
+    s_phone       STRING,
+    s_acctbal     DECIMAL(15,2),
+    s_comment     STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/supplier';
+
+CREATE EXTERNAL TABLE region
+(
+    r_regionkey  BIGINT,
+    r_name       STRING,
+    r_comment    STRING 
+)
+STORED AS PARQUET
+LOCATION 's3://DATASET/region';

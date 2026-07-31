@@ -1,0 +1,4 @@
+---
+
+prometheus_interval: 1s
+prometheus_rate_interval: 2s

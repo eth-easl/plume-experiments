@@ -1,0 +1,12 @@
+all:
+  children:
+    master: # corresponds to an entry under `host_types` in suite designs (and to doe-suite-config/group_vars/<HOST-TYPE-1>` folder)
+      hosts:      # multiple instances of the same host_type (see parameter `n` in suite designs)
+        master_01:
+          ansible_host: "er047.utah.cloudlab.us" # (connect to this host via ssh)
+          private_dns_name: "10.10.1.1"
+    worker:
+      hosts:
+        worker_01:
+          ansible_host: "er021.utah.cloudlab.us" # (connect to this host via ssh)
+          private_dns_name: "10.10.1.2"
