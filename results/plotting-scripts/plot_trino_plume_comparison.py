@@ -76,7 +76,7 @@ _p.add_argument("--scale-events", type=_scale_events, default="0:6,843:7,846:8,8
 _p.add_argument("--all-scale-events", action="store_true",
                 help="mark every event; by default only the last one is drawn, "
                      "since the earlier ones are seconds away from it")
-_p.add_argument("--zoom", nargs=2, type=float, default=(8.0, 12.0),
+_p.add_argument("--zoom", nargs=2, type=float, default=(8.5, 10.5),
                 metavar=("LO", "HI"),
                 help="x window of the 2x2 delta figure, in trimmed-plot minutes")
 _args = _p.parse_args()
@@ -156,7 +156,7 @@ all_delta = all_delta[~np.isnan(all_delta)]
 dlo, dhi = float(all_delta.min()), float(all_delta.max())
 delta_norm = Normalize(vmin=dlo, vmax=dhi)
 
-fig, axes = plt.subplots(3, 2, figsize=(13.5, 11), sharex="col", sharey="row",
+fig, axes = plt.subplots(3, 2, figsize=(20, 11), sharex="col", sharey="row",
                          layout="constrained")
 
 for c, (d, label) in enumerate(cols):
@@ -280,8 +280,8 @@ if _args.a_scaling and _args.b_scaling:
     # the same trim window as the main figure, so x means the same thing there
     A_sc = trim(load(_args.a_scaling, A_CLOSED), T0, T1)
     B_sc = trim(load(_args.b_scaling, B_CLOSED), T0, T1)
-    grid = [[(A, LABEL_A), (B, LABEL_B)],
-            [(A_sc, f"{LABEL_A} - scaling"), (B_sc, f"{LABEL_B} - scaling")]]
+    grid = [[(A, f"{LABEL_A} - fixed cluster"), (B, f"{LABEL_B} - fixed cluster")],
+            [(A_sc, f"{LABEL_A} - elastic cluster"), (B_sc, f"{LABEL_B} - elastic cluster")]]
 
     def zoomed(d):
         """Matched deltas inside the zoom window, on the trimmed-plot clock."""
@@ -301,7 +301,7 @@ if _args.a_scaling and _args.b_scaling:
     zd = np.concatenate([zoomed(d)[1] for row in grid for d, _ in row])
     znorm = Normalize(vmin=float(zd.min()), vmax=float(zd.max()))
 
-    figs, axs = plt.subplots(2, 2, figsize=(15, 9.5), sharex=True, sharey=True,
+    figs, axs = plt.subplots(2, 2, figsize=(20, 9.5), sharex=True, sharey=True,
                              layout="constrained")
     for r, row in enumerate(grid):
         for c, (d, label) in enumerate(row):
@@ -313,23 +313,25 @@ if _args.a_scaling and _args.b_scaling:
 
             # the fixed-size runs get the same marker, unlabelled and faint, only
             # as a time reference: no workers are added in those runs
+            second_axis = ax.twinx()
+            second_axis.set_ylim(0, 10)
+            event_color = "#9ca3af"
             if r and events:
-                event_color = "#9ca3af"
                 # event_color = EVENT_C
                 events_x, events_y = zip(*events)
                 events_x = list(events_x)
                 events_y = list(events_y)
-                second_axis = ax.twinx()
                 events_x.append(T1)
                 events_y.append(events_y[-1])
-                second_axis.step(events_x, events_y, where='post', color=event_color, linewidth=2, label='# Worker Nodes')
-                second_axis.set_ylim(0, 10)
-                second_axis.tick_params(axis='y', colors=event_color)
-                if c:
-                    second_axis.set_ylabel("# Worker Nodes", color=event_color)
-                else:
-                    second_axis.yaxis.set_ticklabels([])
+                second_axis.step(events_x, events_y, where='post', color=event_color, linewidth=3, label='# Worker Nodes')
+            else:
+               second_axis.axhline(y=6, color=event_color, linewidth=3) 
+            if c:
+                second_axis.set_ylabel("# Worker Nodes", color=event_color)
+            else:
+                second_axis.yaxis.set_ticklabels([])
 
+            second_axis.tick_params(axis='y', colors=event_color)
             ax.set_title(label, pad=10)
             ax.grid(True, axis="y", alpha=0.25)
             for s in ("top", "right"):
