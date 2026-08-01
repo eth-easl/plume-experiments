@@ -301,7 +301,7 @@ if _args.a_scaling and _args.b_scaling:
     zd = np.concatenate([zoomed(d)[1] for row in grid for d, _ in row])
     znorm = Normalize(vmin=float(zd.min()), vmax=float(zd.max()))
 
-    figs, axs = plt.subplots(2, 2, figsize=(20, 9.5), sharex=True, sharey=True,
+    figs, axs = plt.subplots(2, 2, figsize=(20, 9), sharex=True, sharey=True,
                              layout="constrained")
     for r, row in enumerate(grid):
         for c, (d, label) in enumerate(row):
@@ -340,7 +340,7 @@ if _args.a_scaling and _args.b_scaling:
     for ax in axs[1, :]:
         ax.set_xlabel("Arrival time (min)")
         ax.set_xlim(Z0, Z1)
-        ax.xaxis.set_major_locator(MultipleLocator(1))
+        ax.xaxis.set_major_locator(MultipleLocator(0.5))
     for ax in axs[:, 0]:
         ax.set_ylabel("Latency delta (s)\nopen-closed loop")
 
