@@ -120,7 +120,8 @@ def plot(data_dict, valid_queries=None):
         cap = None
         if inliers.size and inliers.max() < tops.max():
             cap = 1.06 * inliers.max()
-            ax.set_ylim(top=cap * 1.2)  # headroom for the value labels
+            x_top_lim = cap * 1.2
+            ax.set_ylim(top=x_top_lim)  # headroom for the value labels
 
         # draw error bars per series in a darker variant of the bar color;
         # clip bars above the cap and label their true value instead
@@ -131,7 +132,7 @@ def plot(data_dict, valid_queries=None):
                 if np.isnan(h):
                     continue
                 xc = bar.get_x() + bar.get_width() / 2
-                if cap is not None and h > cap:
+                if cap is not None and h > x_top_lim:
                     bar.set_height(cap)
                     draw_bar_break(ax, bar, cap * 0.94, dark)
                     ax.annotate(f"{h:.0f}", (xc, cap), xytext=(0, 2),
