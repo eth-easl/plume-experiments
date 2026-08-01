@@ -153,6 +153,7 @@ def plot(data_dict, valid_queries=None):
         ax.text(0.01, 0.83, f"sf={sf}", transform=ax.transAxes, fontsize=11, fontstyle='italic',
                 bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8, edgecolor="none"))
         handles, labels = ax.get_legend_handles_labels()
+        ax.set_ylabel("Latency [s]")
         ax.set_xlabel("")
         ax.get_legend().remove()
     
@@ -165,7 +166,9 @@ def plot(data_dict, valid_queries=None):
     if 'title' in data_dict:
         fig.suptitle(data_dict["title"])
         top_adjust = 0.94 if len(data_dict['sf']) == 1 else 0.8
-    fig.subplots_adjust(left=0.05, right=0.98, top=top_adjust, bottom=bot_adjust)
+    side_adjust = data_dict['side_adjust']
+    fig.subplots_adjust(left=side_adjust, right=0.98, top=top_adjust, bottom=bot_adjust)
+    fig.align_ylabels()
     # plt.show()
     plt.savefig(data_dict["out_path"])
 
@@ -174,14 +177,13 @@ SINGLE_NODE = {
     "data": [("data/single-query/plume-1w-aggregated.csv", "Plume"),
              ("data/single-query/duckdb-aggregated.csv", "DuckDB"),
              ("data/single-query/trino-1w-aggregated.csv", "Trino"),
-             ("data/single-query/athena-aggregated.csv", "Athena"),
-             ("data/single-query/big-query-aggregated.csv", "Big Query")],
+             ("data/single-query/athena-aggregated.csv", "Athena")],
     "colors": [adjust_hex_lightness(COL_DANDELION, 0.85),
                adjust_hex_lightness(COL_DUCKDB, 1), 
                adjust_hex_lightness(COL_TRINO, 0.85), 
                adjust_hex_lightness(COL_ATHENA, 1), 
                adjust_hex_lightness(COL_BIGQUERY, 1)],
-    "envs": ["Plume", "DuckDB", "Trino", "Athena", "Big Query"],
+    "envs": ["Plume", "DuckDB", "Trino", "Athena"],
     "sf": [1, 10],
     "y_scale": "s",
     # "title": "TPC-H Latencies",
@@ -190,18 +192,18 @@ SINGLE_NODE = {
     "fig_height": 4.5,
     "label_cols": 5,
     "break_factor": 3,
+    "side_adjust": 0.04
 }
 
 EC2_6W = {
     "data": [("data/single-query/plume-6w-aggregated.csv", "Plume"),
              ("data/single-query/trino-6w-aggregated.csv", "Trino"),
-             ("data/single-query/athena-aggregated.csv", "Athena"),
-             ("data/single-query/big-query-aggregated.csv", "Big Query")],
+             ("data/single-query/athena-aggregated.csv", "Athena")],
     "colors": [adjust_hex_lightness(COL_DANDELION, 0.85),
                adjust_hex_lightness(COL_TRINO, 0.85), 
                adjust_hex_lightness(COL_ATHENA, 1), 
                adjust_hex_lightness(COL_BIGQUERY, 1)],
-    "envs": ["Plume", "Trino", "Athena", "Big Query"],
+    "envs": ["Plume", "Trino", "Athena"],
     "sf": [100],
     "y_scale": "s",
     # "title": "TPC-H Latencies",
@@ -210,6 +212,7 @@ EC2_6W = {
     "fig_height": 2.5,
     "label_cols": 5,
     "break_factor": 2.5,
+    "side_adjust": 0.05
 }
 
 MOTIVATION_ALL = {
@@ -228,6 +231,7 @@ MOTIVATION_ALL = {
     "fig_height": 6.5,
     "label_cols": 5,
     "break_factor": 3,
+    "side_adjust": 0.05
 }
 
 MOTIVATION = {
@@ -246,6 +250,7 @@ MOTIVATION = {
     "fig_height": 6.5,
     "label_cols": 5,
     "break_factor": 4,
+    "side_adjust": 0.08
 }
 
 plot(SINGLE_NODE)

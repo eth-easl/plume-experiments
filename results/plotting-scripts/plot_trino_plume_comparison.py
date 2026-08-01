@@ -71,7 +71,7 @@ _p.add_argument("label_a", nargs="?", default="Trino")
 _p.add_argument("label_b", nargs="?", default="Plume")
 _p.add_argument("--a-scaling", help="open-loop run of A that scales out mid-trace")
 _p.add_argument("--b-scaling", help="open-loop run of B that scales out mid-trace")
-_p.add_argument("--scale-events", type=_scale_events, default="843:7,846:8,855:9",
+_p.add_argument("--scale-events", type=_scale_events, default="0:6,843:7,846:8,855:9",
                 help="second:total_nodes pairs, on the raw (untrimmed) run clock")
 _p.add_argument("--all-scale-events", action="store_true",
                 help="mark every event; by default only the last one is drawn, "
@@ -202,7 +202,7 @@ for c, (d, label) in enumerate(cols):
 
 axes[0, 0].set_ylabel(f"Arrival rate\n")
 axes[1, 0].set_ylabel("Query\nlatency (s)")
-axes[2, 0].set_ylabel("Latency delta (s)\nopen - closed")
+axes[2, 0].set_ylabel("Latency delta (s)\nopen-closed loop")
 
 for ax in axes.ravel():
     for s in ("top", "right"):
@@ -245,7 +245,7 @@ for d, label in cols:
     for key, loop, ls in [("lat", "open", "-"), ("lat_closed", "closed", "--")]:
         xs, ys = _cdf(d[key])
         axc.step(xs, ys, where="post", lw=2.8, ls=ls, color=SYS_COLOR[label],
-                 label=f"{label} {loop}")
+                 label=f"{label} {loop} loop")
 axc.set_xscale("log")
 axc.set_xlabel("Query latency (s)")
 axc.set_ylabel("CDF")
@@ -290,9 +290,6 @@ if _args.a_scaling and _args.b_scaling:
 
     # scale-out seconds are on the raw run clock; the plots are re-zeroed at T0
     events = [(t / 60.0 - T0, n) for t, n in _args.scale_events]
-    events = [(x, n) for x, n in events if Z0 <= x <= Z1]
-    if not _args.all_scale_events:
-        events = events[-1:]
     # the events are cumulative totals, so the run started one node below the first
     n_from = min(n for _, n in _args.scale_events) - 1
     n_to = max(n for _, n in _args.scale_events)
@@ -316,19 +313,22 @@ if _args.a_scaling and _args.b_scaling:
 
             # the fixed-size runs get the same marker, unlabelled and faint, only
             # as a time reference: no workers are added in those runs
-            for x, _ in events:
-                ax.axvline(x, color=EVENT_C if r else "#9ca3af", lw=2,
-                           ls="--", alpha=0.9 if r else 0.45, zorder=1)
             if r and events:
-                # one label right of the line, boxed so it survives landing on a
-                # tall bar. The line is the last event; the note is how long the
-                # whole scale-out took, which the single line elides.
-                ax.text(events[-1][0] + (Z1 - Z0) * 0.015, 0.97,
-                        f"{n_from} → {n_to} nodes\n(over {span_s:.0f} s)",
-                        transform=ax.get_xaxis_transform(), va="top", ha="left",
-                        fontsize=19, color=EVENT_C, zorder=4,
-                        bbox=dict(boxstyle="round,pad=0.2", fc="white",
-                                  ec="none", alpha=0.85))
+                event_color = "#9ca3af"
+                # event_color = EVENT_C
+                events_x, events_y = zip(*events)
+                events_x = list(events_x)
+                events_y = list(events_y)
+                second_axis = ax.twinx()
+                events_x.append(T1)
+                events_y.append(events_y[-1])
+                second_axis.step(events_x, events_y, where='post', color=event_color, linewidth=2, label='# Worker Nodes')
+                second_axis.set_ylim(0, 10)
+                second_axis.tick_params(axis='y', colors=event_color)
+                if c:
+                    second_axis.set_ylabel("# Worker Nodes", color=event_color)
+                else:
+                    second_axis.yaxis.set_ticklabels([])
 
             ax.set_title(label, pad=10)
             ax.grid(True, axis="y", alpha=0.25)
@@ -340,7 +340,7 @@ if _args.a_scaling and _args.b_scaling:
         ax.set_xlim(Z0, Z1)
         ax.xaxis.set_major_locator(MultipleLocator(1))
     for ax in axs[:, 0]:
-        ax.set_ylabel("Latency delta (s)\nopen - closed")
+        ax.set_ylabel("Latency delta (s)\nopen-closed loop")
 
     cax = axs[0, 1].inset_axes([0.52, 0.86, 0.42, 0.05])
     cbz = figs.colorbar(ScalarMappable(norm=znorm, cmap=DELTA_CMAP), cax=cax,
