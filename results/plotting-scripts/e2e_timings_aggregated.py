@@ -92,6 +92,13 @@ def plot(data_dict, valid_queries=None):
         df_sf = df[df['Scalefactor'] == sf]
         ax = fig.add_subplot(gs[i])
         pivot_mean = df_sf.pivot(index="Query", columns="Environment", values=f"Latency mean ({data_dict['y_scale']})").reindex(index=ordered_names, columns=data_dict['envs'])
+        # check that we don't have ties
+        ties = pivot_mean.eq(pivot_mean.min(axis=1), axis=0).sum(axis=1) > 1
+        if ties.any():
+            print("Warning tie in mean latency")
+        print("Number of queries where each system has lowest mean latency")
+        best_mean = pivot_mean.idxmin(axis=1).value_counts()
+        print(best_mean)
         pivot_min = df_sf.pivot(index="Query", columns="Environment", values=f"Latency min ({data_dict['y_scale']})").reindex(index=ordered_names, columns=data_dict['envs'])
         pivot_max = df_sf.pivot(index="Query", columns="Environment", values=f"Latency max ({data_dict['y_scale']})").reindex(index=ordered_names, columns=data_dict['envs'])
         yerr_lower = pivot_mean - pivot_min
