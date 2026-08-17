@@ -3,11 +3,11 @@ from commons.util import get_remotes, common_remote_setup
 from commons.dandelion import *
 
 # configuration
-RPATH_PLUME            = "~/plume-v2"
+RPATH_PLUME            = "~/plume"
 RPATH_PLUME_FUNCTIONS  = "~/plume_functions"
-RPATH_CFG_PLUME_SINGLE = "~/cfg_plumev2_single.json"
-RPATH_CFG_PLUME_MULTI  = "~/cfg_plumev2_multi.json"
-RPATH_START_SCRIPT     = "~/start_dandelion_plumev2.sh"
+RPATH_CFG_PLUME_SINGLE = "~/cfg_plume_single.json"
+RPATH_CFG_PLUME_MULTI  = "~/cfg_plume_multi.json"
+RPATH_START_SCRIPT     = "~/start_dandelion_plume.sh"
 LPATH_GH_TOKEN         = "./gh_token.txt"
 RPATH_GH_TOKEN         = "~/gh_token.txt"
 DANDELION_SYSTEM_CORES = 6
@@ -46,7 +46,7 @@ if args.aws:
 # plume clone and basic setup
 remotes.exec_cmds(
     [f"sed -i '/^case \$- in/,/^esac/ s/^[[:space:]]*\([^#[:space:]]\)/#\1/' ~/.bashrc", # -> allows non interactive shells to load the .bashrc on cloudlab nodes
-     f"git clone git@github.com:tostocker/plume-v2.git {RPATH_PLUME}"], 
+     f"git clone git@github.com:eth-easl/plume.git {RPATH_PLUME}"], 
     condition=f"[ ! -d {RPATH_PLUME} ]", 
     msg="Cloning plume repository...")
 
@@ -58,22 +58,22 @@ if not args.branch is None and args.branch != "":
 
 
 # install functions/client
-if args.install_functions or args.install_client:
-    remotes.exec_cmd('sudo apt install -y gh', msg="Installing gh...")
-    remotes.copy_from_local(LPATH_GH_TOKEN, RPATH_GH_TOKEN)
-    remotes.exec_cmd(f'cat {RPATH_GH_TOKEN} | gh auth login --with-token', msg="Authorizing gh...")
-
 if args.install_functions:
-    release_url = "https://github.com/eth-easl/plume-v2/releases/download/operators"
+    release_url = "https://github.com/eth-easl/plume/releases/download/operators"
     remotes.exec_cmds(
         ['mkdir -p ~/plume_functions',
          'cd ~/plume_functions',
-         f'gh release download operators --repo eth-easl/plume-v2 --pattern \\"plume_*\\" --clobber'],
+         f'wget --continue --quiet {release_url}/plume_stage',
+         f'wget --continue --quiet {release_url}/plume_pq_prepare',
+         f'wget --continue --quiet {release_url}/plume_pq_stage',
+         f'wget --continue --quiet {release_url}/plume_csv_prepare',
+         f'wget --continue --quiet {release_url}/plume_csv_stage'],
         msg="Installing functions...")
 
 if args.install_client:
+    release_url = "https://github.com/eth-easl/plume/releases/download/client"
     remotes.exec_cmds(
-        ['gh release download client --repo eth-easl/plume-v2 --pattern \\"plume_bench\\" --clobber',
+        [f'wget --continue --quiet {release_url}/plume_bench',
          'chmod +x plume_bench'],
         msg="Installing client...")
 
