@@ -11,7 +11,7 @@ RPATH_START_SCRIPT     = "~/start_dandelion_plume.sh"
 LPATH_GH_TOKEN         = "./gh_token.txt"
 RPATH_GH_TOKEN         = "~/gh_token.txt"
 DANDELION_SYSTEM_CORES = 6
-SSH_KEY_PATH           = "~/.ssh/aws-ireland.pem"
+SSH_KEY_PATH           = "~/.ssh/plume26.pem"
 
 
 # basic setup
@@ -59,7 +59,7 @@ if not args.branch is None and args.branch != "":
 
 # install functions/client
 if args.install_functions:
-    release_url = "https://github.com/eth-easl/plume/releases/download/operators"
+    release_url = "https://github.com/eth-easl/plume/releases/download/latest-main"
     remotes.exec_cmds(
         ['mkdir -p ~/plume_functions',
          'cd ~/plume_functions',
@@ -71,10 +71,14 @@ if args.install_functions:
         msg="Installing functions...")
 
 if args.install_client:
-    release_url = "https://github.com/eth-easl/plume/releases/download/client"
+    release_url = "https://github.com/eth-easl/plume/releases/download/latest-main"
     remotes.exec_cmds(
-        [f'wget --continue --quiet {release_url}/plume_bench',
-         'chmod +x plume_bench'],
+        ['mkdir -p ~/plume_bin',
+         'cd ~/plume_bin',
+         f'wget --continue --quiet {release_url}/plume',
+         f'wget --continue --quiet {release_url}/plume_bench',
+         f'wget --continue --quiet {release_url}/plume_export',
+         'chmod +x plume plume_bench plume_export'],
         msg="Installing client...")
 
 

@@ -3,9 +3,10 @@ from commons.util import get_remotes, common_remote_setup
 from commons.dandelion import gen_cfg_multinode, PATH_CFG_MULTINODE
 
 # configuration
-RPATH_DANDELION = "~/dandelion"
-LPATH_START_SCRIPT    = "bash/dandelion/start_dandelion.sh"
-RPATH_START_SCRIPT   = "~/start_dandelion.sh"
+RPATH_DANDELION    = "~/dandelion"
+LPATH_START_SCRIPT = "bash/dandelion/start_dandelion.sh"
+RPATH_START_SCRIPT = "~/start_dandelion.sh"
+SSH_KEY_PATH       = "~/.ssh/plume26.pem"
 
 # basic setup
 parser = argparse.ArgumentParser(description="Setup plume on remote targets.")
@@ -29,7 +30,7 @@ if args.internal_ips is not None and len(args.internal_ips) > 0:
 if args.token: 
     remotes = get_remotes(ssh_key_path=args.token, targets=args.targets)
 elif args.aws: 
-    remotes = get_remotes(ssh_key_path="~/.ssh/aws-ireland.pem", targets=args.targets)
+    remotes = get_remotes(ssh_key_path=SSH_KEY_PATH, targets=args.targets)
 else: 
     remotes = get_remotes(targets=args.targets)
 common_remote_setup(remotes)

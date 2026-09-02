@@ -63,15 +63,14 @@ This part contains utilities to setup Plume on a cluster of aws or cloudlab node
           Internal IP: 172.31.42.197
 
     SSH commands:
-      Node 0: ssh -i ~/.ssh/aws-2026.pem ubuntu@13.62.99.122
-      Node 1: ssh -i ~/.ssh/aws-2026.pem ubuntu@13.60.99.0
+      Node 0: ssh -i ~/.ssh/plume26.pem ubuntu@13.62.99.122
+      Node 1: ssh -i ~/.ssh/plume26.pem ubuntu@13.60.99.0
 
     Start workers:
       python remote_start_plume_workers.py --aws ubuntu@13.62.99.122 ubuntu@13.60.99.0
     ```
 
 ## Cloudlab Setup
-
 
 1. Run the `cloudlab_full_setup.py` script and enter the ec2 node details in the following form. The first node will be setup as the client/scheduler node, all others as worker nodes.
 
@@ -134,4 +133,4 @@ This part contains utilities to setup Plume on a cluster of aws or cloudlab node
 
 The dandelion nodes may be started using the `~/start_dandelion_plume.sh` script on the node itself or using the `remote_start_plume_workers.py` python script from a remote node.
 
-The benchmarks can be run using `~/plume/build/plume/benchmarks/tpch/plume_bench ~/plume/benchmarks/tpch/<config>` if the client was built or `~/plume_bench ~/plume/benchmarks/tpch/<config>` if the client release was installed.
+The benchmarks can be run using `~/plume/build/plume/benchmarks/plume_bench ~/plume/benchmarks/tpch/<config>` if the client was built or `~/plume_bin/plume_bench ~/plume/benchmarks/tpch/<config>` if the client release was installed.

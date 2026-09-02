@@ -5,6 +5,7 @@ import termios
 import tty
 from commons.colors import print_info, print_error
 
+SSH_KEY_PATH = "~/.ssh/plume26.pem"
 CONFIG = {
     "dandelion_branch": "debug/sharding_performance", # leave empty to use main branch
     # "plume_branch": "dev/benchmark-updates", # leave empty to use main branch
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     print_info("Running remote setup scripts...")
     targets = [f"ubuntu@{n['public_ip']}" for n in parsed_nodes]
 
-    setup_dandelion_cmd = [sys.executable, "remote_setup_dandelion.py", "--aws"] + targets
+    setup_dandelion_cmd = [sys.executable, "remote_setup_dandelion.py", "--aws", "-t", SSH_KEY_PATH] + targets
     setup_dandelion_cmd += ["--internal_ips"] + [n['internal_ip'] for n in parsed_nodes]
     if "dandelion_branch" in CONFIG:
         setup_dandelion_cmd += ["-b", CONFIG['dandelion_branch']]
@@ -99,7 +100,7 @@ if __name__ == "__main__":
     if cmd_res.returncode != 0:
         print_error("Plume setup failed!")
 
-    setup_plume_cmd = [sys.executable, "remote_setup_plume.py", "--aws"]
+    setup_plume_cmd = [sys.executable, "remote_setup_plume.py", "--aws", "-t", SSH_KEY_PATH]
     if CONFIG['install_functions']: setup_plume_cmd.append("--install-functions")
     if CONFIG['install_client']: setup_plume_cmd.append("--install-client")
     if CONFIG['build_functions']: setup_plume_cmd.append("--build-functions")
@@ -125,7 +126,7 @@ if __name__ == "__main__":
     print()
     print_info("SSH commands:")
     for node in parsed_nodes:
-        print(f"  Node {node['node_index']}: ssh -i ~/.ssh/aws-ireland.pem ubuntu@{node['public_ip']}")
+        print(f"  Node {node['node_index']}: ssh -i {SSH_KEY_PATH} ubuntu@{node['public_ip']}")
     print()
     print_info("Start workers:")
     start_workers_cmd = "python remote_start_plume_workers.py --aws"
