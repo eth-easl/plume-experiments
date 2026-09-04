@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from commons.util import get_remotes, common_remote_setup
+from commons.util import get_remotes, common_remote_setup, APT, APT_WAIT
 from commons.dandelion import gen_cfg_multinode, PATH_CFG_MULTINODE
 
 SETUP_DIR = Path(__file__).resolve().parent
@@ -21,6 +21,10 @@ parser.add_argument("--local-ssh-key", type=str)
 parser.add_argument("--git-user", type=str)
 parser.add_argument("--git-email", type=str)
 args = parser.parse_args()
+
+if not args.clone_with_http and not args.local_ssh_key:
+    print("Either clone with http by using '--clone-with-http' or supply a ssh key path using '--local-ssh-key <path>'!")
+    exit(1)
 
 has_internal_ips = False
 if args.internal_ips is not None and len(args.internal_ips) > 0:
@@ -55,8 +59,9 @@ remotes.exec_cmds(
 
 # TODO: this requires sudo which may not always be appropriate
 remotes.exec_cmds(
-    ["sudo apt update",
-     "sudo apt install -y protobuf-compiler"],
+    [APT_WAIT,
+     f"{APT} update",
+     f"{APT} install -y protobuf-compiler"],
      condition="! type protoc &> /dev/null",
      msg="Installing protobuf compiler...")
 

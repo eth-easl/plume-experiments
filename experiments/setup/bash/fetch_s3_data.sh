@@ -15,6 +15,7 @@ download() {
     shift 2
     local pairs=("$@")
 
+    echo "Fetching data from '$base_url' to '$target'..."
     mkdir -p "$target"
     (
         cd "$target"

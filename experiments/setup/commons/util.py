@@ -9,6 +9,10 @@ from commons.remote import RemoteTargets
 
 REMOTE_SSH_KEY = "~/.ssh/id_ed25519"
 
+APT_WAIT = ("while sudo fuser /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock "
+            "/var/cache/apt/archives/lock >/dev/null 2>&1; do sleep 5; done")
+APT = "sudo apt-get -o DPkg::Lock::Timeout=600"
+
 def load_setup_config(path: str):
     with open(path, "r") as file:
         config = json.load(file)

@@ -1,5 +1,5 @@
 import argparse
-from commons.util import get_remotes, common_remote_setup
+from commons.util import get_remotes, common_remote_setup, APT, APT_WAIT
 from commons.dandelion import *
 
 # configuration
@@ -27,6 +27,10 @@ parser.add_argument("--git-user", type=str)
 parser.add_argument("--git-email", type=str)
 args = parser.parse_args()
 
+if not args.clone_with_http and not args.local_ssh_key:
+    print("Either clone with http by using '--clone-with-http' or supply a ssh key path using '--local-ssh-key <path>'!")
+    exit(1)
+
 config = {}
 if args.local_ssh_key:
     config["sshKeyPath"] = args.local_ssh_key
@@ -44,8 +48,10 @@ common_remote_setup(remotes, config)
 
 # > aws only
 if args.aws:
-    remotes.exec_cmd(
-        "sudo apt update && sudo apt install -y make build-essential unzip libssl-dev",
+    remotes.exec_cmds(
+        [APT_WAIT,
+         f"{APT} update",
+         f"{APT} install -y make build-essential unzip libssl-dev"],
         msg="Installing basic build tools..."
     )
 
