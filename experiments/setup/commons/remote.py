@@ -72,7 +72,7 @@ class RemoteTargets:
                 return True
             else:
                 print("Aborted.")
-                exit()
+                exit(1)
         else:
             return self.check_results()
 
@@ -101,11 +101,11 @@ class RemoteTargets:
                 return True
             else:
                 print("Aborted.")
-                exit()
+                exit(1)
         else:
             return self.check_results()
-    
-    def copy_from_local(self, local_src, remote_dest, condition=None):
+
+    def copy_from_local(self, local_src, remote_dest, condition=None, exit_on_fail=True):
         cond_mask = [True]*len(self.targets)
         if not condition is None:
             self.exec_cmd(condition, exit_on_fail=False)
@@ -129,6 +129,15 @@ class RemoteTargets:
                         capture_output=True, shell=True)
                 if res.returncode != 0:
                     self.exec_fails.append((t_idx, str(res.stdout), str(res.stderr)))
+
+        if exit_on_fail:
+            if self.check_and_print_results():
+                return True
+            else:
+                print("Aborted.")
+                exit(1)
+        else:
+            return self.check_results()
 
     def write_file_content(self, content, remote_dest, mask=None, msg=None, exit_on_fail=True):
         # Escape any existing backticks or dollar signs if you want literal text, 

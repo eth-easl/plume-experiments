@@ -1,0 +1,15 @@
+{
+    "queries": ["q1.sql", "q2.sql", "q3.sql", "q4.sql", "q5.sql", "q6.sql", "q7.sql", "q8.sql", 
+                "q9.sql", "q10.sql", "q11.sql", "q12.sql", "q13.sql", "q14.sql", "q15.sql", 
+                "q16.sql", "q17.sql", "q18.sql", "q19.sql", "q20.sql", "q21.sql", "q22.sql"],
+    "queryStoragePrefix": "~/plume/benchmarks/tpch/queries/",
+    "tablePathPrefix": "https://10.0.1.3:7777/tpch10",
+    "tablePathSuffix": ".parquet",
+    "tableNumFiles": {
+        "lineitem": 2,
+        "orders": 2,
+        "partsupp": 2
+    },    
+    "repetitions": 5,
+    "debugPrints": false
+}

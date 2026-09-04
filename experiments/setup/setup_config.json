@@ -1,0 +1,12 @@
+{
+    "cloneWithHTTP": true,
+    "sshKey": "",
+
+    "dandelionBranch": "",
+    "plumeBranch": "",
+
+    "plumeBuildFunctions": false,
+    "plumeBuildClient": false,
+    "plumeInstallFunctions": true,
+    "plumeInstallClient": true
+}
