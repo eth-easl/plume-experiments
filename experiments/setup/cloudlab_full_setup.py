@@ -107,6 +107,15 @@ if __name__ == "__main__":
         setup_plume_cmd += ["-b", config['plumeBranch']]
     run_setup_step("Plume", setup_plume_cmd, config.get('gitConfig', {}), cwd=SETUP_DIR)
 
+    setup_dataclient_cmd = [sys.executable, f"{SETUP_DIR}/remote_setup_dataclient.py"]
+    if config['cloneWithHTTP']: setup_plume_cmd.append("--clone-with-http")
+    if "sshKey" in config and len(config["sshKey"]) > 0:
+        setup_dataclient_cmd += ["-t", config["sshKey"]]
+    if "plumeExperimentsBranch" in config and len(config["plumeExperimentsBranch"]) > 0:
+        setup_dataclient_cmd += ["-b", config['plumeExperimentsBranch']]
+    setup_dataclient_cmd.append(targets[-1]) # only install on last node
+    run_setup_step("Dataclient", setup_dataclient_cmd, config.get('gitConfig', {}), cwd=SETUP_DIR)
+
     print_info("Remote setups completed!\n")
 
     print_info("Parsed nodes:")

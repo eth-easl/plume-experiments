@@ -11,7 +11,7 @@ import re
 import pandas as pd
 
 COLUMNS = ["query_number", "scale", "Min", "Mean", "Max"]
-QUERY_LINE = re.compile(r"^\s*Query\s+\S*?Q(\d+)\s*:\s*(.+?)\s*$")
+QUERY_LINE = re.compile(r"^\s*Query\s+\S*?q(\d+)\s*:\s*(.+?)\s*$")
 
 def parse_data_file(path):
     timings = {}

@@ -74,7 +74,7 @@ for _ in range(config["repetitions"]):
             res.show()
         
 for query, measurements in timings.items():
-    out = f"Query TPCH_{query.split('.')[0].upper()}: "
+    out = f"Query {query.split('.')[0].lower()}: "
     for m in measurements:
         out += f"{int(m*1000)},"
     out = out[:-1]
