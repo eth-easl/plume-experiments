@@ -1,20 +1,25 @@
 import argparse
+from pathlib import Path
 from commons.util import get_remotes, common_remote_setup
 from commons.dandelion import gen_cfg_multinode, PATH_CFG_MULTINODE
 
+SETUP_DIR = Path(__file__).resolve().parent
+
 # configuration
 RPATH_DANDELION    = "~/dandelion"
-LPATH_START_SCRIPT = "bash/dandelion/start_dandelion.sh"
+LPATH_START_SCRIPT = f"{SETUP_DIR}/bash/dandelion/start_dandelion.sh"
 RPATH_START_SCRIPT = "~/start_dandelion.sh"
-SSH_KEY_PATH       = "~/.ssh/plume26.pem"
 
 # basic setup
 parser = argparse.ArgumentParser(description="Setup plume on remote targets.")
 parser.add_argument("targets", nargs='+', type=str)
 parser.add_argument("-t", "--token", type=str)
 parser.add_argument("-b", "--branch", type=str)
-parser.add_argument("--aws", action="store_true")
 parser.add_argument("--internal_ips", nargs='+', type=str)
+parser.add_argument("--clone-with-http", action="store_true")
+parser.add_argument("--local-ssh-key", type=str)
+parser.add_argument("--git-user", type=str)
+parser.add_argument("--git-email", type=str)
 args = parser.parse_args()
 
 has_internal_ips = False
@@ -27,13 +32,19 @@ if args.internal_ips is not None and len(args.internal_ips) > 0:
         print(f"{args.targets[i]} <-> {args.internal_ips[i]}")
     has_internal_ips = True
 
+config = {}
+if args.local_ssh_key:
+    config["sshKeyPath"] = args.local_ssh_key
+if args.git_user:
+    config["gitUser"] = args.git_user
+if args.git_email:
+    config["gitEmail"] = args.git_email
+
 if args.token: 
     remotes = get_remotes(ssh_key_path=args.token, targets=args.targets)
-elif args.aws: 
-    remotes = get_remotes(ssh_key_path=SSH_KEY_PATH, targets=args.targets)
 else: 
     remotes = get_remotes(targets=args.targets)
-common_remote_setup(remotes)
+common_remote_setup(remotes, config)
 
 
 # setup dandelion
@@ -61,8 +72,9 @@ remotes.exec_cmds(
     msg="Adding user to kvm group + increasing open file descriptor limit..."
 )
 
+dandelion_url = "https://github.com/eth-easl/dandelion.git" if args.clone_with_http else "git@github.com:eth-easl/dandelion.git"
 remotes.exec_cmds(
-    [f"git clone git@github.com:eth-easl/dandelion.git {RPATH_DANDELION}"], 
+    [f"git clone {dandelion_url} {RPATH_DANDELION}"], 
     condition=f"[ ! -d {RPATH_DANDELION} ]", 
     msg="Cloning dandelion...")
 

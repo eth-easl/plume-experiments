@@ -3,7 +3,7 @@
                 "q9.sql", "q10.sql", "q11.sql", "q12.sql", "q13.sql", "q14.sql", "q15.sql", 
                 "q16.sql", "q17.sql", "q18.sql", "q19.sql", "q20.sql", "q21.sql", "q22.sql"],
     "queryStoragePrefix": "~/plume/benchmarks/tpch/queries/",
-    "tablePathPrefix": "https://tpc-h-sf-1-ireland.s3.eu-west-1.amazonaws.com",
+    "tablePathPrefix": "https://10.0.1.3:7777/tpch1",
     "tablePathSuffix": ".parquet",
     "tableNumFiles": {
         "lineitem": 1,

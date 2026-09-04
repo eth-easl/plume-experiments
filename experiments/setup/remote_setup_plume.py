@@ -8,10 +8,7 @@ RPATH_PLUME_FUNCTIONS  = "~/plume_functions"
 RPATH_CFG_PLUME_SINGLE = "~/cfg_plume_single.json"
 RPATH_CFG_PLUME_MULTI  = "~/cfg_plume_multi.json"
 RPATH_START_SCRIPT     = "~/start_dandelion_plume.sh"
-LPATH_GH_TOKEN         = "./gh_token.txt"
-RPATH_GH_TOKEN         = "~/gh_token.txt"
 DANDELION_SYSTEM_CORES = 6
-SSH_KEY_PATH           = "~/.ssh/plume26.pem"
 
 
 # basic setup
@@ -24,15 +21,25 @@ parser.add_argument("--install-functions", action="store_true")
 parser.add_argument("--build-functions", action="store_true")
 parser.add_argument("--install-client", action="store_true")
 parser.add_argument("--build-client", action="store_true")
+parser.add_argument("--clone-with-http", action="store_true")
+parser.add_argument("--local-ssh-key", type=str)
+parser.add_argument("--git-user", type=str)
+parser.add_argument("--git-email", type=str)
 args = parser.parse_args()
+
+config = {}
+if args.local_ssh_key:
+    config["sshKeyPath"] = args.local_ssh_key
+if args.git_user:
+    config["gitUser"] = args.git_user
+if args.git_email:
+    config["gitEmail"] = args.git_email
 
 if args.token: 
     remotes = get_remotes(ssh_key_path=args.token, targets=args.targets)
-elif args.aws: 
-    remotes = get_remotes(ssh_key_path=SSH_KEY_PATH, targets=args.targets)
 else: 
     remotes = get_remotes(targets=args.targets)
-common_remote_setup(remotes)
+common_remote_setup(remotes, config)
 
 
 # > aws only
@@ -44,9 +51,10 @@ if args.aws:
 
 
 # plume clone and basic setup
+plume_url = "https://github.com/eth-easl/plume.git" if args.clone_with_http else "git@github.com:eth-easl/plume.git"
 remotes.exec_cmds(
     [f"sed -i '/^case \$- in/,/^esac/ s/^[[:space:]]*\([^#[:space:]]\)/#\1/' ~/.bashrc", # -> allows non interactive shells to load the .bashrc on cloudlab nodes
-     f"git clone git@github.com:eth-easl/plume.git {RPATH_PLUME}"], 
+     f"git clone {plume_url} {RPATH_PLUME}"], 
     condition=f"[ ! -d {RPATH_PLUME} ]", 
     msg="Cloning plume repository...")
 

@@ -1,25 +1,20 @@
 import argparse
-import sys
 import time
 from commons.util import get_remotes
 
 # configuration
-RPATH_START_SCRIPT = "~/start_dandelion_plumev2.sh"
+RPATH_START_SCRIPT = "~/start_dandelion_plume.sh"
 RPATH_LOG          = "~/dandelion.log"
-SSH_KEY_PATH       = "~/.ssh/aws-ireland.pem"
 
 
 # basic setup
 parser = argparse.ArgumentParser(description="Setup plume on remote targets.")
 parser.add_argument("targets", nargs='+', type=str)
 parser.add_argument("-t", "--token", type=str)
-parser.add_argument("--aws", action="store_true")
 args = parser.parse_args()
 
 if args.token: 
     remotes = get_remotes(ssh_key_path=args.token, targets=args.targets)
-elif args.aws: 
-    remotes = get_remotes(ssh_key_path=SSH_KEY_PATH, targets=args.targets)
 else: 
     remotes = get_remotes(targets=args.targets)
 

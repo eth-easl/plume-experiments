@@ -1,18 +1,13 @@
 import re
-import subprocess
 import sys
 import termios
 import tty
-from commons.colors import print_info, print_error
+from pathlib import Path
+from commons.colors import print_info
+from commons.util import load_setup_config, run_setup_step
 
-CONFIG = {
-    "dandelion_branch": "debug/sharding_performance", # leave empty to use main branch
-    # "plume_branch": "dev/benchmark-updates", # leave empty to use main branch
-    "build_functions": False,
-    "build_client": False,
-    "install_functions": True,
-    "install_client": True,
-}
+SETUP_DIR = Path(__file__).resolve().parent
+SETUP_CONFIG_PATH = f"{SETUP_DIR}/setup_config.json"
 
 def parse_cloudlab_addresses(input_data):
     lines = [line.strip() for line in input_data.strip().split("\n") if line.strip()]
@@ -60,6 +55,8 @@ def user_confirm():
         
 
 if __name__ == "__main__":
+    config = load_setup_config(SETUP_CONFIG_PATH)
+
     # Get input
     print_info("Paste your node data below then press Enter followed by 'Ctrl + D' to finish.\n")
     print("-" * 50)
@@ -88,25 +85,27 @@ if __name__ == "__main__":
     print_info("Running remote setup scripts...")
     targets = [f"{n['user']}@{n['public_ip']}" for n in parsed_nodes]
 
-    setup_dandelion_cmd = [sys.executable, "remote_setup_dandelion.py"] + targets
+    setup_dandelion_cmd = [sys.executable, f"{SETUP_DIR}/remote_setup_dandelion.py"] + targets
+    if "sshKey" in config and len(config["sshKey"]) > 0:
+        setup_dandelion_cmd += ["-t", config["sshKey"]]
     setup_dandelion_cmd += ["--internal_ips"] + [n['internal_ip'] for n in parsed_nodes]
-    if "dandelion_branch" in CONFIG:
-        setup_dandelion_cmd += ["-b", CONFIG['dandelion_branch']]
-    cmd_res = subprocess.run(setup_dandelion_cmd, check=True)
-    if cmd_res.returncode != 0:
-        print_error("Plume setup failed!")
+    if config['cloneWithHTTP']: setup_dandelion_cmd.append("--clone-with-http")
+    if "dandelionBranch" in config and len(config["dandelionBranch"]) > 0:
+        setup_dandelion_cmd += ["-b", config['dandelionBranch']]
+    run_setup_step("Dandelion", setup_dandelion_cmd, config.get('gitConfig', {}), cwd=SETUP_DIR)
 
-    setup_plume_cmd = [sys.executable, "remote_setup_plume.py"]
-    if CONFIG['install_functions']: setup_plume_cmd.append("--install-functions")
-    if CONFIG['install_client']: setup_plume_cmd.append("--install-client")
-    if CONFIG['build_functions']: setup_plume_cmd.append("--build-functions")
-    if CONFIG['build_client']: setup_plume_cmd.append("--build-client")
+    setup_plume_cmd = [sys.executable, f"{SETUP_DIR}/remote_setup_plume.py"]
+    if "sshKey" in config and len(config["sshKey"]) > 0:
+        setup_plume_cmd += ["-t", config["sshKey"]]
+    if config['plumeInstallFunctions']: setup_plume_cmd.append("--install-functions")
+    if config['plumeInstallClient']: setup_plume_cmd.append("--install-client")
+    if config['plumeBuildFunctions']: setup_plume_cmd.append("--build-functions")
+    if config['plumeBuildClient']: setup_plume_cmd.append("--build-client")
+    if config['cloneWithHTTP']: setup_plume_cmd.append("--clone-with-http")
     setup_plume_cmd += targets
-    if "plume_branch" in CONFIG:
-        setup_plume_cmd += ["-b", CONFIG['plume_branch']]
-    cmd_res = subprocess.run(setup_plume_cmd, check=True)
-    if cmd_res.returncode != 0:
-        print_error("Plume setup failed!")
+    if "plumeBranch" in config and len(config["plumeBranch"]) > 0:
+        setup_plume_cmd += ["-b", config['plumeBranch']]
+    run_setup_step("Plume", setup_plume_cmd, config.get('gitConfig', {}), cwd=SETUP_DIR)
 
     print_info("Remote setups completed!\n")
 
@@ -120,12 +119,17 @@ if __name__ == "__main__":
         print(f"    Public IP:   {node['public_ip']}")
         print(f"    Internal IP: {node['internal_ip']}")
     print()
+    has_ssh_key = "sshKey" in config and len(config["sshKey"]) > 0
+
     print_info("SSH commands:")
+    ssh_key = f" -i {config['sshKey']}" if has_ssh_key else ""
     for node in parsed_nodes:
-        print(f"  Node {node['node_index']}: ssh {node['user']}@{node['public_ip']}")
+        print(f"  Node {node['node_index']}: ssh{ssh_key} {node['user']}@{node['public_ip']}")
     print()
     print_info("Start workers:")
-    start_workers_cmd = "python remote_start_plume_workers.py"
+    start_workers_cmd = f"python {SETUP_DIR}/remote_start_plume_workers.py"
+    if has_ssh_key:
+        start_workers_cmd += f" -t {config['sshKey']}"
     for node in parsed_nodes:
         start_workers_cmd += f" {node['user']}@{node['public_ip']}"
     print(f"  {start_workers_cmd}")
