@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from commons.util import get_remotes, common_remote_setup, APT, APT_WAIT
+from commons.util import get_remotes, common_remote_setup
 from commons.dandelion import gen_cfg_multinode, PATH_CFG_MULTINODE
 
 SETUP_DIR = Path(__file__).resolve().parent
@@ -9,6 +9,7 @@ SETUP_DIR = Path(__file__).resolve().parent
 RPATH_DANDELION    = "~/dandelion"
 LPATH_START_SCRIPT = f"{SETUP_DIR}/bash/dandelion/start_dandelion.sh"
 RPATH_START_SCRIPT = "~/start_dandelion.sh"
+LPATH_PROTOC_INSTALL_SCRIPT = f"{SETUP_DIR}/bash/dandelion/install_protoc.sh"
 
 # basic setup
 parser = argparse.ArgumentParser(description="Setup plume on remote targets.")
@@ -57,25 +58,27 @@ remotes.exec_cmds(
     condition=f"! type cargo &> /dev/null", 
     msg="Installing rust...")
 
-# TODO: this requires sudo which may not always be appropriate
+remotes.copy_from_local(
+    LPATH_PROTOC_INSTALL_SCRIPT, "~/install_protoc.sh", 
+    condition="! type protoc &> /dev/null")
 remotes.exec_cmds(
-    [APT_WAIT,
-     f"{APT} update",
-     f"{APT} install -y protobuf-compiler"],
+    ["~/install_protoc.sh"],
      condition="! type protoc &> /dev/null",
      msg="Installing protobuf compiler...")
 
 remotes.exec_cmds(
     ["echo off | sudo tee /sys/devices/system/cpu/smt/control"],
     condition="[ \$(cat /sys/devices/system/cpu/smt/active) -eq \"1\" ]",
-    msg="Disabling hyper-threading..."
-)
+    msg="Disabling hyper-threading...")
 
 remotes.exec_cmds(
-    ["sudo usermod -aG kvm \$(whoami)",
-     "echo ulimit -n 1048576 >> ~/.bashrc"],
-    msg="Adding user to kvm group + increasing open file descriptor limit..."
-)
+    ["sudo usermod -aG kvm \$(whoami)"],
+    condition="[ id -nG \"\$USERNAME\" | grep -qw \"\$GROUPNAME\" ]",
+    msg="Adding user to kvm group...")
+
+remotes.exec_cmds(
+    ["echo ulimit -n 1048576 >> ~/.bashrc"],
+    msg="Increasing open file descriptor limit...")
 
 dandelion_url = "https://github.com/eth-easl/dandelion.git" if args.clone_with_http else "git@github.com:eth-easl/dandelion.git"
 remotes.exec_cmds(
