@@ -81,7 +81,8 @@ if args.install_functions:
          f'wget --continue --quiet {release_url}/plume_pq_prepare',
          f'wget --continue --quiet {release_url}/plume_pq_stage',
          f'wget --continue --quiet {release_url}/plume_csv_prepare',
-         f'wget --continue --quiet {release_url}/plume_csv_stage'],
+         f'wget --continue --quiet {release_url}/plume_csv_stage',
+         f'wget --continue --quiet {release_url}/plume_df_combine'],
         msg="Installing functions...")
 
 if args.install_client:

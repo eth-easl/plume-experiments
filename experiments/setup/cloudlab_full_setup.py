@@ -55,8 +55,6 @@ def user_confirm():
         
 
 if __name__ == "__main__":
-    config = load_setup_config(SETUP_CONFIG_PATH)
-
     # Get input
     print_info("Paste your node data below then press Enter followed by 'Ctrl + D' to finish.\n")
     print("-" * 50)
@@ -81,6 +79,7 @@ if __name__ == "__main__":
 
     print_info("Confirm setup...")
     user_confirm()
+    config = load_setup_config(SETUP_CONFIG_PATH)
 
     print_info("Running remote setup scripts...")
     targets = [f"{n['user']}@{n['public_ip']}" for n in parsed_nodes]

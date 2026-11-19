@@ -3,6 +3,11 @@ set -euo pipefail
 
 install_dir="$HOME/.local"
 
+if ! command -v unzip &> /dev/null; then
+    sudo apt update
+    sudo apt install -y unzip
+fi
+
 # make sure installation folders exist and are in the PATH
 if [ ! -d "$install_dir/bin" ]; then
     echo "export PATH=\"$install_dir/bin:\$PATH\"" >> $HOME/.bashrc

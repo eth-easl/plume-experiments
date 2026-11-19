@@ -25,7 +25,8 @@ def parse_data_file(path):
             query_number = int(match.group(1))
             values = [float(v) for v in match.group(2).split(",") if v.strip()]
             if not values:
-                raise ValueError(f"{path}:{line_number}: no timings for query {query_number}")
+                print(f"got no timings for query {query_number} -> skipping it")
+                continue
             timings[query_number] = values
     if not timings:
         raise ValueError(f"{path}: no query timings found")

@@ -73,7 +73,7 @@ remotes.exec_cmds(
 
 remotes.exec_cmds(
     ["sudo usermod -aG kvm \$(whoami)"],
-    condition="[ id -nG \"\$USERNAME\" | grep -qw \"\$GROUPNAME\" ]",
+    condition="! (id -Gn | grep -qw kvm)",
     msg="Adding user to kvm group...")
 
 remotes.exec_cmds(

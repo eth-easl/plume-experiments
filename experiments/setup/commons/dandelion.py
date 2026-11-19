@@ -58,7 +58,7 @@ def gen_cfg_multinode(target_ips):
     return json.dumps(config, indent=2)
 
 def gen_start_script(cfg_paths):
-    s = 'readonly features="kvm,timestamp,log_function_stdio,vendored-ssl,data_locality"\n'
+    s = 'readonly features="kvm,vendored-ssl,log_function_stdio,data_locality,trace-timestamps,trace-data"\n'
     s += 'readonly log="debug,machine_interface=info"\n'
     for i, p in enumerate(cfg_paths):
         if i > 0: s += '#'
