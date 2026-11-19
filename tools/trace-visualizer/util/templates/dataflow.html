@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<header>
+  <div class="title-row">
+    <h1>{{TITLE}}</h1>
+    <label class="ctl"><span class="ctl-label">Query</span><select id="query"></select></label>
+  </div>
+  <div id="stats"></div>
+  <div id="notes"></div>
+</header>
+<div id="controls">
+  <div class="ctl"><span class="ctl-label">Edge width</span>
+    <div class="seg" id="metric"><button data-v="size" class="active">Size</button><button data-v="items">Items</button></div>
+  </div>
+  <div class="ctl"><span class="ctl-label">Scale</span>
+    <div class="seg" id="scale"><button data-v="log">log</button><button data-v="sqrt" class="active">√</button><button data-v="linear">linear</button></div>
+  </div>
+  <label class="ctl"><input type="checkbox" id="show-inputs" checked> Composition inputs</label>
+  <label class="ctl"><input type="checkbox" id="show-labels" checked> Input set labels</label>
+  <button id="fit-btn" class="btn">Fit</button>
+  <div id="legend"></div>
+</div>
+<div id="canvas">
+  <svg id="graph" xmlns="http://www.w3.org/2000/svg"><g id="viewport"></g></svg>
+</div>
+<div id="hint">Data flows left → right · Hover a node or edge for details, click to pin · Drag to pan, scroll to zoom</div>
+<div id="tooltip" role="tooltip"></div>
+<script id="dataflow-data" type="application/json">{{DATA}}</script>
+<script>
+{{JS}}
+</script>
+</body>
+</html>

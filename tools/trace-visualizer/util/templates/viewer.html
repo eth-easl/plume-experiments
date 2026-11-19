@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{TITLE}}</title>
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<div id="tabs"></div>
+<div id="controls">
+  <label>Row height: <span id="rowh-val">5</span>px &nbsp;<input type="range" id="rowh-slider" min="2" max="40" value="5" step="1"></label>
+  <button id="fit-btn">Fit all</button>
+  <div id="run-wrap"><label for="run-select">Run:</label><select id="run-select"></select></div>
+</div>
+<div id="scroll-area"><div id="main"></div></div>
+<div id="node-legend"></div>
+<div id="legend"></div>
+<div id="hint">Scroll to pan vertically &nbsp;·&nbsp; Cmd/Ctrl+scroll to zoom &nbsp;·&nbsp; Shift+scroll to adjust row height &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Click bar to highlight group &nbsp;·&nbsp; Click legend/node to filter &nbsp;·&nbsp; R to reset &nbsp;·&nbsp; Esc to clear</div>
+<div id="tooltip"></div>
+<script id="trace-data" type="application/json">{{DATA}}</script>
+<script>
+{{JS}}
+</script>
+</body>
+</html>

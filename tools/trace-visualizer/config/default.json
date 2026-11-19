@@ -1,0 +1,24 @@
+{
+  "span": {
+    "start": ["IOQueueStart", "MasterFetchStart", "ComputeQueueStart", "RemoteTake", "FetchingStart",
+              "ParsingStart", "LoadStart", "TransferStart", "EngineStart", 0],
+    "end": ["FutureReturn", "EngineEnd"]
+  },
+  "remote": "RemoteTake",
+  "bars": [
+    {"label": "Input Deserialization", "start": 0,                    "end": "DeserializationEnd",              "color": "#C3F9B8"},
+    {"label": "Composition Parsing",   "start": "DeserializationEnd", "end": "DynamicParsingEnd",               "color": "#E3B8F9"},
+    {"label": "Sharding",              "start": "ShardingStart",      "end": "IOQueueStart",                    "color": "#B8F9D8"},
+    {"label": "IO Queue",              "start": "IOQueueStart",       "end": "IOQueueEnd",                      "color": "#F9B8D3"},
+    {"label": "Compute Queue",         "start": "ComputeQueueStart",  "end": "ComputeQueueEnd",                 "color": "#F9B8F9"},
+    {"label": "Remote Routing",        "start": "RemoteTake",         "end": "RemoteIOQueueStart",              "color": "#CDB8F9"},
+    {"label": "Remote IO Queue",       "start": "RemoteIOQueueStart", "end": "RemoteIOQueueEnd",                "color": "#F9B8D3"},
+    {"label": "Remote Compute Queue",  "start": "RemoteComputeQueueStart", "end": "RemoteComputeQueueEnd",      "color": "#F9B8F9"},
+    {"label": "Master Fetch",          "start": "MasterFetchStart",   "end": "MasterFetchEnd",                  "color": "#B8D8F9"},
+    {"label": "Fetch Inputs",          "start": "FetchingStart",      "end": "FetchingEnd",                     "color": "#B8D8F9"},
+    {"label": "Parse Binary",          "start": "ParsingStart",       "end": "ParsingEnd",                      "color": "#F9F9B8"},
+    {"label": "Load Binary",           "start": "LoadStart",          "end": ["TransferStart", "EngineStart"],  "color": "#F9E5B8"},
+    {"label": "Transfer Inputs",       "start": "TransferStart",      "end": "EngineStart",                     "color": "#F9D3B8"},
+    {"label": "Execute",               "start": "EngineStart",        "end": "EngineEnd",                       "color": "#B8F9CD"}
+  ]
+}
